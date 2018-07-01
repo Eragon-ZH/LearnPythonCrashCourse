@@ -6,8 +6,11 @@ class GameStats():
         self.ai_settings = ai_settings
         self.reset_stats()
         # 游戏启动激活
-        self.game_active = True
+        self.game_active = False
+        self.high_score = 0
 
     def reset_stats(self):
-        '''初始化所有的统计信息'''
+        '''初始化随游戏进行变化的统计信息'''
         self.ships_left = self.ai_settings.ships_limit
+        self.score = 0
+        self.level = 1
