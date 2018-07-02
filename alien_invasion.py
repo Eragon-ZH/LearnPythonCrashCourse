@@ -9,10 +9,12 @@ import game_functions as gf
 from game_stats import GameStats
 from button import Button
 from scoreboard import Scoreboard
+from sound import Music
 
 def run_game():
     # 初始化，创建屏幕对象
     pygame.init()
+    pygame.mixer.init()
     ai_settings = Settings()
     screen = pygame.display.set_mode(
         (ai_settings.screen_width, ai_settings.screen_height))
@@ -31,11 +33,13 @@ def run_game():
     aliens = Group()
     # 创建外星人群
     gf.creat_fleet(ai_settings, screen, ship, aliens)
-
+    # 创建背景音乐
+    music = Music()
+    music.bg_music.play(-1)
     # 开始循环
     while True:
         gf.check_events(ai_settings, screen, stats, sb, play_button, ship,
-                                                                aliens,bullets)
+                                                        aliens,bullets, music)
         if stats.game_active:
             ship.update()
             gf.update_bullets(ai_settings, screen, stats, sb, ship, aliens,

@@ -5,21 +5,22 @@ from time import sleep
 from bullet import Bullet
 from alien import Alien
 
-def check_keydown_events(event, ai_settings, screen, ship, bullets):
+def check_keydown_events(event, ai_settings, screen, ship, bullets, music):
     '''响应按键'''
     if event.key == pygame.K_RIGHT:
         ship.moving_right = True
     if event.key == pygame.K_LEFT:
         ship.moving_left = True
     elif event.key == pygame.K_SPACE:
-        fire_bullet(ai_settings, screen, ship, bullets)
+        fire_bullet(ai_settings, screen, ship, bullets, music)
     elif event.key == pygame.K_q:
         sys.exit()
 
-def fire_bullet(ai_settings, screen, ship, bullets):
+def fire_bullet(ai_settings, screen, ship, bullets, music):
     '''如果没有达到限制就再发射一颗子弹'''
     # 创建一颗子弹，并加入到编组bullets
     if len(bullets) < ai_settings.bullet_allowed:
+        music.biu_music.play()
         new_bullet = Bullet(ai_settings, screen, ship)
         bullets.add(new_bullet)
 
@@ -55,7 +56,7 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens,
         ship.center_ship()
 
 def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens,
-                                                                    bullets):
+                                                                bullets, music):
     '''监听键盘和鼠标事件'''
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -65,8 +66,8 @@ def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens,
             check_play_button(ai_settings, screen, stats, sb, play_button, ship,
                                             aliens, bullets, mouse_x, mouse_y)
         elif event.type == pygame.KEYDOWN:
-            check_keydown_events(event, ai_settings, screen, ship, bullets)
-
+            check_keydown_events(event, ai_settings, screen, ship, bullets,
+                                                                        music)
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
 
@@ -201,6 +202,7 @@ def ship_hit(ai_settings, screen, stats, sb, ship, aliens, bullets):
         # 暂停
         sleep(1)
     else:
+        stats.save_high_score()
         pygame.mouse.set_visible(True)
         stats.game_active = False
 
