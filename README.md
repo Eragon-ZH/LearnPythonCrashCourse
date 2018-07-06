@@ -4,4 +4,4 @@
 
 alien_invasion: 一个pygame的小游戏
 
-data_visualization: 数据可视化, Matplotlib, Pygal, CSV, Json
+data_visualization: 数据可视化, Matplotlib, Pygal, CSV, Json, API
