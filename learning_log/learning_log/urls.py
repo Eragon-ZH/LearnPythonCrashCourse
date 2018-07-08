@@ -19,5 +19,6 @@ from django.conf.urls import include, url
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'', include('learning_logs.urls', namespace='learning_logs'))
+    url(r'^users/', include('users.urls', namespace='users')),
+    url(r'', include('learning_logs.urls', namespace='learning_logs')),
 ]
