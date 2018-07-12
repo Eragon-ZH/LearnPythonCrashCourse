@@ -6,4 +6,4 @@ alien_invasion: 一个pygame的小游戏
 
 data_visualization: 数据可视化, Matplotlib, Pygal, CSV, Json, API
 
-learning_log: 使用Django开发的学习笔记
+learning_log: 使用Django开发的学习笔记, [地址](https://dovahkiin.herokuapp.com/)
